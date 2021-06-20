@@ -5,8 +5,8 @@ import pandas as pd
 import sys
 from pyupbit.request_api import _call_public_api
 
-access = "j7lMh0E1rBDj6K0njxvTxeAfv8IMqkvIz4QEVpPw"
-secret = "T6xKJkNDdrpOKnLfENlDLwfze398dhy0FHCSTeVx"     # 본인 값으로 변경
+# access = 
+# secret =      # 본인 값으로 변경
 upbit = pyupbit.Upbit(access, secret)
 
 def get_current_price(ticker="KRW-BTC"):
