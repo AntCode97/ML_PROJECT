@@ -1,31 +1,32 @@
 import time
 
 import joblib
+import xgboost
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import mglearn
 from sklearn.model_selection import train_test_split
+xg = xgboost.XGBRegressor()
 import joblib
 import datetime
 import pyupbit
 import csv
-from joblib import load
+
 
 
 
 # model = joblib.load(open('rnd_depth_3.pkl','rb'))
 # model = joblib.load(open('rnd_depth_3.pkl','rb'))
 # model = joblib.load(open('rnd_depth_3.pkl','rb'))
-model_name = "rnd_4"
-change = 'fall'
+model_name = "voting_3"
 #model_name="rnd_3"
 model = joblib.load(open(f'{model_name}.pkl','rb'))
 #f = open(f"./test_{model_name}.csv",'a', newline='')
-f = open(f"./{change}/test_{model_name}.csv",'a', newline='')
+f = open(f"./trash.csv",'a', newline='')
 w = csv.writer(f)
 
-data = pd.read_csv(f"./test_doge_{change}.csv", sep=",")
+data = pd.read_csv("./test_trx.csv", sep=",")
 columns = data.columns
 columns= list(columns)
 columns.pop(0)
@@ -36,7 +37,7 @@ print(columns)
 # X = data.drop(["current_price", "time"], axis=1)
 #X = X.to_dict('list')
 
-coin = "KRW-DOGE"
+coin = "KRW-TRX"
 
 balance = 10000
 wallet = 0

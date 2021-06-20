@@ -17,15 +17,14 @@ from joblib import load
 # model = joblib.load(open('rnd_depth_3.pkl','rb'))
 # model = joblib.load(open('rnd_depth_3.pkl','rb'))
 # model = joblib.load(open('rnd_depth_3.pkl','rb'))
-model_name = "rnd_4"
-change = 'fall'
+model_name = "gbrt_2"
 #model_name="rnd_3"
 model = joblib.load(open(f'{model_name}.pkl','rb'))
 #f = open(f"./test_{model_name}.csv",'a', newline='')
-f = open(f"./{change}/test_{model_name}.csv",'a', newline='')
+f = open(f"./trash.csv",'a', newline='')
 w = csv.writer(f)
 
-data = pd.read_csv(f"./test_doge_{change}.csv", sep=",")
+data = pd.read_csv("./test_doge_fall.csv", sep=",")
 columns = data.columns
 columns= list(columns)
 columns.pop(0)
@@ -51,6 +50,7 @@ ask_price = 0
 bid_price = 0
 predict_price = 0
 current_price =0
+sc=load('std_scaler.bin')
 
 def bid(current_price, bid_price) :
     global balance, wallet, cnt,buy_price,w,predict_price
@@ -97,7 +97,8 @@ while timecount<7199:
 
 
     avg = sum_price/count
-    predict_price = model.predict(orders)
+    orders_scaled = sc.transform(orders)
+    predict_price = model.predict(orders_scaled)
     #수수료를 포함해도, 이득을 취할 수 있는 가격일 때 매수
     if round(current_price*1.0005) < round(avg):
         print(current_price, "평균가:",round(avg), avg, predict_price)
